@@ -5,7 +5,7 @@
 
 This repository contains the source code for evaluating ML models trained for Spatial Nominal Entity Recognition as proposed in 
 
-> Amine Medad, Mauro Gaio Ludovic Moncla, Sébastien Mustière, and Yannick Le Nir. Comparing supervised learning algorithms for Spatial Nominal Entity recognition. The 23rd AGILE International Conference on Geographic Information Science. 2020
+> Amine Medad, Mauro Gaio, Ludovic Moncla, Sébastien Mustière, and Yannick Le Nir. Comparing supervised learning algorithms for Spatial Nominal Entity recognition. The 23rd AGILE International Conference on Geographic Information Science. 2020
 
 
 Datasets are given in the `corpus` directory and models in the `models` directory. 
@@ -131,6 +131,6 @@ Run the following command to evaluate the GRU model trained with 5 grams :
 
 ## Acknowledgement
 
-This work is supported and financed by French National Research Agency (ANR) under the CHOUCAS project (ANR-16-CE23-0018). 
+This work is supported and funded in part by French National Research Agency (ANR) under the CHOUCAS project (ANR-16-CE23-0018). 
 
 The [CHOUCAS project](http://choucas.ign.fr) is a French interdisciplinary research project aiming to respond to a need expressed by the high mountain gendarmerie platoon to help localising victims in mountain area.
