@@ -1,0 +1,8 @@
+numpy==1.18.3
+pandas==1.0.3
+gensim==3.8.3
+joblib==0.14.0
+treetaggerwrapper==2.3
+tensorflow==2.2
+Keras==2.4.3
+scikit_learn==0.21.3
