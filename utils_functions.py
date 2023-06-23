@@ -35,38 +35,45 @@ def get_term_occurrences_from_ene(filename):
     return words
 
 
-def get_ngrams_wt_term_outside_ene(filename, frequency_dict_geo, ngram_id):
+def get_ngrams_wt_term_outside_ene(filename, frequency_dict_geo, ngram_id, position=4, ngram_size=7):
     json_content = []
+    print_content = ''
     if os.path.exists(filename):
         try:
-            
             tree = etree.parse(filename)
             tokens = tree.xpath('.//w')
             for i, token in enumerate(tokens):
+                print_content = ''
                 if token.text in frequency_dict_geo:
                     line = {'num':ngram_id, 'class':'1', 'id_phrase':'0','pivot':token.text,'occurrence': '0', 'url':filename}
                     phrase = []
-                    for j in range(3,0,-1):
+                    for j in range(position-1, 0, -1):
                         try:
                             words = {'word':tokens[i-j].text, 'POS':tokens[i-j].get('pos'), 'lemma':tokens[i-j].get('lemma')}
+                            print_content += tokens[i-j].text + ' '
                         except IndexError:
                             words = {'word':'_', 'POS':'_', 'lemma':'_'}
+                            print_content += '_ '
                         phrase.append(words)
+                        
                     phrase.append({'word':token.text, 'POS':token.get('pos') + '+LS', 'lemma':token.get('lemma')})
-                    for j in range(1,4):
+                    print_content += '[ ' + token.text + ' ] '
+                    for j in range(1, ngram_size+1-position):
                         try:
-                            words = {'word':tokens[i+j].text, 'POS':tokens[i+j].get('pos'), 'lemma':tokens[i+j].get('lemma')}
+                            words = {'word':tokens[i+j].text, 'POS':tokens[i-j].get('pos'), 'lemma':tokens[i-j].get('lemma')}
+                            print_content += tokens[i+j].text + ' '
                         except IndexError:
                             words = {'word':'_', 'POS':'_', 'lemma':'_'}
+                            print_content += '_ '
                         phrase.append(words)
+                        
+                    print(print_content)
                     line['phrase'] = phrase
-                    try:
-                        print(tokens[i-3].text, tokens[i-2].text , tokens[i-1].text , '[', token.text, ']', tokens[i+1].text, tokens[i+2].text, tokens[i+3].text)
-                    except IndexError:
-                        pass
+                    
                     ngram_id += 1
                     json_content.append(line)
-        except :
+        except:
+            print("pass")
             pass
     
     return json_content
