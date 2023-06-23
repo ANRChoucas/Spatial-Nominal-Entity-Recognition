@@ -1,6 +1,6 @@
 import os
 from lxml import etree
-
+import json
 
 def text_preprocessing(text):
     text = text.replace(' ', ' ')
@@ -79,3 +79,6 @@ def get_ngrams_wt_term_outside_ene(filename, frequency_dict_geo, ngram_id, posit
     return json_content
 
 
+def load_lexicon(lexicon_filename):
+    with open(lexicon_filename) as fp:
+        return json.load(fp)
