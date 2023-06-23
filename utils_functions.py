@@ -1,5 +1,19 @@
-from lxml import etree
 import os
+from lxml import etree
+
+
+def text_preprocessing(text):
+    text = text.replace(' ', ' ')
+    text = text.replace('œ', 'oe')
+    return text.replace('\n', ' ').strip()
+
+
+def run_perdido(text, output_dir, filename, geoparser, ):
+    try :
+        return geoparser(text_preprocessing(text))
+    except etree.XMLSyntaxError as e:
+        return None
+    
 
 def get_term_occurrences_from_ene(filename):
     words = []
@@ -19,7 +33,6 @@ def get_term_occurrences_from_ene(filename):
         except:
             pass
     return words
-
 
 
 def get_ngrams_wt_term_outside_ene(filename, frequency_dict_geo, ngram_id):
@@ -59,15 +72,3 @@ def get_ngrams_wt_term_outside_ene(filename, frequency_dict_geo, ngram_id):
     return json_content
 
 
-def text_preprocessing(text):
-    text = text.replace(' ', ' ')
-    text = text.replace('œ', 'oe')
-    return text.replace('\n', ' ').strip()
-
-
-def run_perdido(text, output_dir, filename, geoparser, ):
-    try :
-        return geoparser(text_preprocessing(text))
-    except etree.XMLSyntaxError as e:
-        return None
-    
