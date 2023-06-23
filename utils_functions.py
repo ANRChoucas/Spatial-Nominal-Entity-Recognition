@@ -44,7 +44,7 @@ def get_ngrams_wt_term_outside_ene(filename, frequency_dict_geo, ngram_id):
             tokens = tree.xpath('.//w')
             for i, token in enumerate(tokens):
                 if token.text in frequency_dict_geo:
-                    line = {'num':ngram_id, 'class':'1', 'id_phrase':'0','pivot':token.text,'occurrence': '0', 'url':os.path.join(doc, doc+'.xml')}
+                    line = {'num':ngram_id, 'class':'1', 'id_phrase':'0','pivot':token.text,'occurrence': '0', 'url':filename}
                     phrase = []
                     for j in range(3,0,-1):
                         try:
