@@ -1,6 +1,12 @@
 import os
 from lxml import etree
 import json
+import pandas as pd
+
+import nltk
+nltk.download('punkt')  # Download the necessary resources for tokenization
+from nltk.tokenize import sent_tokenize
+
 
 def text_preprocessing(text):
     text = text.replace(' ', ' ')
@@ -8,7 +14,7 @@ def text_preprocessing(text):
     return text.replace('\n', ' ').strip()
 
 
-def run_perdido(text, output_dir, filename, geoparser, ):
+def run_perdido(text, geoparser):
     try :
         return geoparser(text_preprocessing(text))
     except etree.XMLSyntaxError as e:
@@ -82,3 +88,16 @@ def get_ngrams_wt_term_outside_ene(filename, frequency_dict_geo, ngram_id, posit
 def load_lexicon(lexicon_filename):
     with open(lexicon_filename) as fp:
         return json.load(fp)
+
+
+def load_edda_dataframe(edda_dataset_path, domain=None):
+    data = pd.read_csv(edda_dataset_path, sep='\t')
+    data.rename(columns={'edda-superdomainPred1':'domain'}, inplace=True)
+    if domain:
+        data = data[data['domain'] == domain]
+    return data[['volume', 'numero', 'head', 'author','content', 'domain']]
+
+
+def segment_sentences(text):
+    sentences = sent_tokenize(text_preprocessing(text))
+    return sentences
