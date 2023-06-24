@@ -101,3 +101,14 @@ def load_edda_dataframe(edda_dataset_path, domain=None):
 def segment_sentences(text):
     sentences = sent_tokenize(text_preprocessing(text))
     return sentences
+
+
+def get_lexicon_occurrences_in_ene(filename, lexicon):
+    words = get_term_occurrences_from_ene(filename)
+    return {value: words.count(value) for value in lexicon}
+
+
+def get_lexicon_occurrences(terms, lexicon=None):
+    if lexicon is None:
+        lexicon = terms
+    return {value: terms.count(value) for value in lexicon}
