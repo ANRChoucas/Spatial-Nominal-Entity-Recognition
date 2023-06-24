@@ -85,9 +85,14 @@ def get_ngrams_wt_term_outside_ene(filename, frequency_dict_geo, ngram_id, posit
     return json_content
 
 
-def load_lexicon(lexicon_filename):
+def load_json_dict(lexicon_filename):
     with open(lexicon_filename) as fp:
         return json.load(fp)
+    
+
+def save_json(filename, data):
+    with open(filename, 'w') as fp:
+        json.dump(data, fp, ensure_ascii=False)
 
 
 def load_edda_dataframe(edda_dataset_path, domain=None):
@@ -101,11 +106,6 @@ def load_edda_dataframe(edda_dataset_path, domain=None):
 def segment_sentences(text):
     sentences = sent_tokenize(text_preprocessing(text))
     return sentences
-
-
-def get_lexicon_occurrences_in_ene(filename, lexicon):
-    words = get_term_occurrences_from_ene(filename)
-    return {value: words.count(value) for value in lexicon}
 
 
 def get_lexicon_occurrences(terms, lexicon=None):
