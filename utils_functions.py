@@ -41,7 +41,7 @@ def get_term_occurrences_from_ene(filename):
     return words
 
 
-def get_ngrams_wt_term_outside_ene(filename, frequency_dict_geo, ngram_id, position=4, ngram_size=7):
+def get_ngrams_wt_term_outside_ene(filename, frequency_dict_geo, ngram_id, label='1', position=4, ngram_size=7):
     json_content = []
     print_content = ''
     if os.path.exists(filename):
@@ -51,7 +51,7 @@ def get_ngrams_wt_term_outside_ene(filename, frequency_dict_geo, ngram_id, posit
             for i, token in enumerate(tokens):
                 print_content = ''
                 if token.text in frequency_dict_geo:
-                    line = {'num':ngram_id, 'class':'1', 'id_phrase':'0','pivot':token.text,'occurrence': '0', 'url':filename}
+                    line = {'num':ngram_id, 'class':label, 'id_phrase':'0','pivot':token.text,'occurrence': '0', 'url':filename}
                     phrase = []
                     for j in range(position-1, 0, -1):
                         try:
